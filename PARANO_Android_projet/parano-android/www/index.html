@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#180e29"><meta name="description" content="Secrets, questions piquantes et révélations : un jeu de soirée sur un seul téléphone.">
+<title>PARANO · Le jeu des secrets</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PARANO">
+<style>
+:root {--bg:#130c20;--card:#241833;--border:#423154;--purple:#a970fa;--pink:#ff5caa;--lemon:#ffdc6a;--white:#fff9ff;--mute:#b2a4bf;--good:#91edc7;--red:#ff736c;--r:22px}*{box-sizing:border-box}html{min-height:100%;background:var(--bg)}body{margin:0;color:var(--white);font-family:'DM Sans',system-ui,-apple-system,Arial,sans-serif;background:radial-gradient(ellipse 70% 25% at 100% 0%,#49226c8f 0%,transparent 100%),radial-gradient(ellipse 65% 30% at 0% 70%,#5a184d54 0%,transparent 100%),var(--bg);min-height:100svh;overflow-x:hidden}button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible{outline:3px solid #eeb8ff;outline-offset:3px}#app{width:min(600px,100%);margin:auto;min-height:100svh;padding:20px 20px calc(35px + env(safe-area-inset-bottom));display:flex;flex-direction:column}header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 25px}.brand{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-1px;font-size:25px;display:flex;align-items:center;gap:9px}.brand-mark{background:linear-gradient(135deg,#ec58cf,#8048ff);width:33px;height:33px;display:grid;place-items:center;border-radius:10px;box-shadow:0 2px 20px #974dfb4d}.header-right{display:flex;gap:8px;align-items:center}.tiny{background:#ffffff12;border:1px solid #ffffff24;color:#fff;font-weight:800;border-radius:100px;padding:9px 12px;font-size:12px}.tiny:hover{background:#ffffff21}h1,h2,h3,p{margin:0}h1,h2{font-family:'Space Grotesk',sans-serif;letter-spacing:-1.5px;line-height:1.09}h1{font-size:clamp(45px,11vw,71px)}h2{font-size:clamp(30px,8vw,45px)}h3{font-size:18px;letter-spacing:-.4px}.eyebrow{display:inline-flex;align-items:center;gap:7px;letter-spacing:.14em;font-weight:800;text-transform:uppercase;color:var(--lemon);font-size:11px;margin-bottom:14px}.hero{margin:23px 0 24px;position:relative}.hero .gradient{background:linear-gradient(110deg,#fca6e9 12%,#ba89ff 58%,#ffcc73 105%);background-clip:text;color:transparent}.sub{color:#cfbfd8;line-height:1.58;font-size:16px;margin-top:18px;max-width:450px}.face{font-size:78px;filter:drop-shadow(0 12px 20px #0007);transform:rotate(-8deg);display:inline-block}.face-box{display:flex;justify-content:flex-end;margin-top:5px;margin-bottom:-40px}.card{background:linear-gradient(140deg,#291c3e,#22172f);border:1px solid #70518166;border-radius:var(--r);padding:22px;box-shadow:0 13px 35px #07020e35;margin:11px 0}.soft-card{background:#ffffff0a;border:1px solid #ffffff16;border-radius:18px;padding:17px;margin:12px 0}.btn{border:0;width:100%;border-radius:15px;background:linear-gradient(110deg,#e67adf,#aa76fc);box-shadow:0 6px 17px #ce54fc3b;color:#1c0d26;padding:17px 16px;font-weight:900;font-size:16px;transition:transform .14s,filter .14s;min-height:53px}.btn:active,.btn2:active,.choice:active{transform:scale(.98)}.btn:hover{filter:brightness(1.08)}.btn:disabled{opacity:.4;cursor:not-allowed}.btn2{border:1px solid #705d84;background:#ffffff11;color:#fff;border-radius:15px;font-weight:800;font-size:15px;padding:15px;width:100%;min-height:50px}.btn2:hover{background:#ffffff1b}.button-stack{display:grid;gap:10px;margin-top:18px}.muted{color:var(--mute);font-size:13px;line-height:1.48}.center{text-align:center}.center .sub{margin-left:auto;margin-right:auto}.space{height:15px}.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:16px}.rule{padding:15px 10px;background:#ffffff0b;border:1px solid #ffffff17;border-radius:15px;text-align:center}.rule .emoji{font-size:27px;margin-bottom:7px}.rule b{font-size:12px}.rule span{display:block;color:#bfaed0;font-size:11px;margin-top:4px;line-height:1.3}.pill{border:1px solid #ffffff2a;background:#ffffff0b;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800}.pill.pink{border-color:#ff86ba6c;color:#ffb1d6;background:#ff5b9e18}.player-field{display:flex;gap:8px;margin-top:12px}.player-field input{border:1px solid #6c527d;background:#160e22;color:white;padding:15px 14px;border-radius:13px;min-width:0;flex:1}.player-field .add{width:53px;border:none;border-radius:13px;background:#b88af8;color:#180c25;font-size:26px;font-weight:800}.roster{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}.player-chip{border-radius:999px;background:#ffffff14;border:1px solid #ffffff25;color:white;padding:9px 11px;font-weight:700;font-size:14px}.player-chip .x{color:#ff9ec0;font-weight:900;margin-left:8px}.fieldtitle{font-size:12px;text-transform:uppercase;font-weight:800;letter-spacing:.1em;color:#d6c1ea;margin:16px 0 8px}.option-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.choice{border-radius:15px;border:1px solid #624a74;background:#21172f;padding:15px 14px;color:#e9dff0;text-align:left;min-height:72px;display:flex;flex-direction:column;justify-content:center;gap:5px}.choice strong{font-size:14px}.choice small{color:#a995bc;font-size:12px}.choice.active{border-color:#f0a0ec;background:linear-gradient(130deg,#56345f,#3a2855);box-shadow:inset 0 0 0 1px #d98ce4}.setup-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.glass{background:linear-gradient(140deg,#48255f 0%,#2b1a3f 100%);border:1px solid #9f68a27d;box-shadow:inset 0 0 40px #c759ad12,0 15px 50px #0e07163b;border-radius:25px;padding:26px 21px;text-align:center;position:relative;overflow:hidden;margin:18px 0}.glass:before{content:"";position:absolute;inset:-20%;background:repeating-conic-gradient(from 0deg at 50% 43%,#ffffff08 0 12deg,transparent 12deg 24deg);opacity:.45;pointer-events:none}.glass>*{position:relative}.avatar{width:83px;height:83px;margin:0 auto 13px;border-radius:26px;background:linear-gradient(135deg,#c76bd8,#8250b6);display:grid;place-items:center;font-size:42px;transform:rotate(-5deg);box-shadow:0 10px 25px #200d3180}.name{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:800;letter-spacing:-1px}.word{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:clamp(23px,6vw,36px);line-height:1.23;letter-spacing:-.85px;overflow-wrap:anywhere}.secret{font-size:clamp(25px,6.5vw,41px);line-height:1.22;letter-spacing:-.9px;font-family:'Space Grotesk';font-weight:800;margin:22px 0 27px;text-wrap:balance}.counter{font-weight:800;color:#ead8ff;font-size:12px}.roundline{height:5px;background:#ffffff20;border-radius:10px;margin:0 0 24px;overflow:hidden}.roundline > div{height:100%;background:linear-gradient(90deg,#d976d6,#ffb5c8);border-radius:10px;transition:width .3s}.notice{margin:20px auto;color:#cdbcdc;font-size:13px;line-height:1.5;max-width:450px}.warn{color:#ffcfaa}.target-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}.target{font-size:16px;background:#2a1c3d;border:1px solid #694b7b;border-radius:18px;padding:18px 7px;min-height:69px;color:white;font-weight:800}.target:focus,.target:hover{background:#553069;border-color:#e7a5f3}.heart{font-size:57px;display:block;margin:4px auto 14px;animation:float 2.5s infinite ease-in-out}@keyframes float{50%{transform:translateY(-7px) rotate(6deg)}}.bigpill{font-size:13px;letter-spacing:.04em;font-weight:800;color:#f5c7ee;background:#8c4c7a45;padding:9px 14px;border-radius:999px;display:inline-block}.divider{height:1px;background:#ffffff21;margin:24px 0}.score-row{display:flex;align-items:center;gap:11px;padding:14px 0;border-bottom:1px solid #ffffff14}.score-row:last-child{border:0}.rank{width:29px;color:#d4a2fa;font-weight:900;font-size:19px}.scorebar{height:7px;background:#ffffff15;border-radius:20px;overflow:hidden;margin-top:7px}.scorebar>div{height:100%;background:linear-gradient(90deg,#9d73ee,#ff7fb6);border-radius:20px}.foot{margin-top:auto;text-align:center;color:#877591;font-size:11px;padding-top:21px}.toprow{display:flex;justify-content:space-between;align-items:center;margin:3px 0 15px}.dash{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:17px 0}.dash > div{background:#ffffff12;border:1px solid #ffffff20;border-radius:13px;padding:14px 8px;text-align:center}.dash b{font-size:24px;display:block}.dash span{color:var(--mute);font-size:10px;text-transform:uppercase;letter-spacing:.08em}.more{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:17px}.mini-person{display:inline-flex;align-items:center;gap:5px;padding:7px 9px;background:#ffffff0d;border-radius:99px;border:1px solid #ffffff18;font-size:12px}.question-label{color:#ffc4e0;letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:900}.ghost{background:transparent;border:0;color:#ceb8df;text-decoration:underline;font-weight:700;font-size:13px;margin-top:10px}.h-notice{border-left:3px solid #ec8bbf;padding:12px 13px;background:#ffffff0c;border-radius:0 12px 12px 0;color:#dac9e5;font-size:13px;line-height:1.45;margin:16px 0}.paper{background:#fff6fb;color:#291232;border-radius:21px;padding:25px 19px;transform:rotate(-1deg);box-shadow:0 13px 20px #0a021d50}.paper .secret{margin:12px 0;font-size:clamp(24px,6.8vw,38px);color:#2d1538}.kbd{background:#00000011;border-radius:9px;padding:4px 9px;display:inline-block;font-size:13px;font-weight:800;color:#7e4b77}.switch-note{font-size:12px;color:#cbb2da;margin-top:9px}.banner{border:1px solid #e5a25b78;background:#e5a25b1d;color:#ffe8c0;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.4}.separator{height:12px}.dots{display:flex;gap:5px;justify-content:center}.dots span{height:6px;width:6px;border-radius:100%;background:#ffffff48}.dots span.on{background:#ffb8dd;transform:scale(1.35)}@media(min-width:610px){#app{padding-top:30px}h1{font-size:70px}.hero{margin-top:45px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+#app{padding-top:calc(20px + env(safe-area-inset-top));padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+#installHelp{margin:12px 0 0;text-align:left}#installHelp[hidden],#installBtn[hidden]{display:none}
+.player-field input{font-size:16px}
+@media(display-mode:standalone){#installBtn,#installHelp{display:none}}
+
+.category{min-height:90px}.category .checkmark{display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #9d80b7;border-radius:6px;margin-right:3px;color:#c7b2d6}.category.active .checkmark{background:#f1b2ef;color:#271435;border-color:#f1b2ef}.category-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.selection-total{margin:12px 0}.selection-total b{color:#f4b4ed}.adult-check{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.45;background:#ff9c6713;border:1px solid #ffb17755;border-radius:12px;padding:12px;color:#ffe0c8}.adult-check input{flex:none;width:20px;height:20px;accent-color:#d68bfa;margin:0}
+</style>
+</head>
+<body><main id="app" aria-live="polite"></main>
+<script>
+'use strict';
+const QUESTIONS = {
+  "1": [
+    "Qui ici ferait le pire espion tellement il ou elle parle trop ?",
+    "Qui ici a le plus de chances de tomber amoureux en vacances ?",
+    "Qui ici pourrait mentir avec un sourire parfaitement innocent ?",
+    "Qui ici ferait semblant de ne pas avoir vu ton message ?",
+    "Qui ici survivrait le moins longtemps dans une émission de téléréalité ?",
+    "Qui ici te ferait rire même pendant une énorme dispute ?",
+    "Qui ici est le plus susceptible de raconter ton secret par accident ?",
+    "Qui ici te défendrait même quand tu as complètement tort ?",
+    "Qui ici a le plus de chances de quitter une soirée sans dire au revoir ?",
+    "Qui ici pourrait devenir célèbre pour une raison ridicule ?",
+    "Qui ici ferait la pire première impression à tes parents ?",
+    "Qui ici ment le mieux quand on lui demande « ça va ? » ?",
+    "Qui ici est le plus susceptible de fouiller discrètement les réseaux de son ex ?",
+    "Qui ici pourrait organiser une fête surprise et oublier l'invité principal ?",
+    "Qui ici aurait le plus de dossiers embarrassants dans son téléphone ?",
+    "Qui ici te rendrait fou ou folle en colocation ?",
+    "Qui ici pourrait vendre ses amis pour une semaine de vacances de rêve ?",
+    "Qui ici a l'air sage, mais cache probablement le plus de bêtises ?",
+    "Qui ici est le plus susceptible de dire « je suis en route » en étant encore au lit ?",
+    "Qui ici pourrait garder un secret jusqu'à la tombe ?",
+    "Qui ici t'embarrasserait le plus en public ?",
+    "Qui ici prendrait le plus mal une mauvaise blague à son sujet ?",
+    "Qui ici pourrait se faire draguer sans s'en rendre compte ?",
+    "Qui ici serait le pire partenaire dans un escape game ?",
+    "Qui ici aurait le plus de mal à passer une journée sans son téléphone ?",
+    "Qui ici choisirais-tu pour t'accompagner au bout du monde ?",
+    "Qui ici te donnerait les pires conseils amoureux ?",
+    "Qui ici serait capable de pleurer devant une publicité ?",
+    "Qui ici ne pourrait pas tenir une heure dans une émission de rencontres ?",
+    "Qui ici s'en sortirait le mieux en improvisant un mensonge ?",
+    "Qui ici te surprendrait le plus en devenant parent ?",
+    "Qui ici oserait le plus facilement chanter devant tout le monde ?",
+    "Qui ici choisirais-tu pour résoudre une grosse galère à 3 heures du matin ?",
+    "Qui ici serait secrètement le plus compétitif dans ce jeu ?",
+    "Qui ici a le plus de chances de prendre une décision absurde sur un coup de tête ?",
+    "Qui ici garde probablement des captures d'écran compromettantes ?",
+    "Qui ici te ferait une scène pour une place à table ?",
+    "Qui ici est capable de pardonner presque n'importe quoi ?",
+    "Qui ici pourrait avoir une double vie totalement improbable ?",
+    "Qui ici aurait le plus de succès comme animateur de soirée ?",
+    "Qui ici arriverait en retard à son propre mariage ?",
+    "Qui ici pourrait commander trois desserts en prétendant ne pas avoir faim ?",
+    "Qui ici serait le plus mauvais conducteur de bus ?",
+    "Qui ici se perdrait dans un parking souterrain ?",
+    "Qui ici ferait une excellente imitation d'un autre joueur ?",
+    "Qui ici serait capable d'acheter un objet totalement inutile à trois heures du matin ?",
+    "Qui ici ferait le plus de bruit en mangeant des chips au cinéma ?",
+    "Qui ici serait le plus susceptible de partir en vacances sans sa valise ?",
+    "Qui ici gagnerait un concours de mauvaise foi ?",
+    "Qui ici ferait le plus mauvais cuisinier dans un restaurant gastronomique ?",
+    "Qui ici pourrait devenir ami avec un inconnu en cinq minutes ?",
+    "Qui ici serait le premier à dormir pendant une soirée ?",
+    "Qui ici ferait un discours de mariage interminable ?",
+    "Qui ici serait capable de négocier le prix d'une baguette ?",
+    "Qui ici te ferait le plus rire en étant complètement sérieux ?",
+    "Qui ici prendrait le plus de place dans un lit ?",
+    "Qui ici serait le plus doué pour inventer une excuse au travail ?",
+    "Qui ici perdrait une fortune en achetant des gadgets ?",
+    "Qui ici serait le pire coéquipier lors d'un quiz de culture générale ?",
+    "Qui ici ferait croire à tout le monde qu'il connaît une célébrité ?",
+    "Qui ici serait le plus susceptible de porter deux chaussettes différentes ?",
+    "Qui ici ne partagerait jamais ses frites ?",
+    "Qui ici serait le plus stressé par un simple appel téléphonique ?",
+    "Qui ici pourrait transformer un petit problème en catastrophe nationale ?",
+    "Qui ici ferait une meilleure carrière de détective privé ?",
+    "Qui ici a probablement la playlist la plus improbable ?",
+    "Qui ici oublierait l'anniversaire de son meilleur ami ?",
+    "Qui ici serait le plus difficile à réveiller le matin ?",
+    "Qui ici serait le meilleur pour raconter une histoire drôle ?",
+    "Qui ici ferait le plus de photos avant de manger son plat ?",
+    "Qui ici pourrait adopter un animal sur un coup de tête ?",
+    "Qui ici ferait le pire guide touristique ?",
+    "Qui ici pourrait passer une semaine entière en pyjama ?",
+    "Qui ici serait le plus susceptible de parler à son GPS ?",
+    "Qui ici choisirais-tu pour monter un meuble sans notice ?",
+    "Qui ici a le rire le plus communicatif ?",
+    "Qui ici dépenserait tout son argent le premier jour des vacances ?",
+    "Qui ici serait le plus doué pour obtenir un surclassement à l'hôtel ?",
+    "Qui ici pourrait confondre un mariage avec un anniversaire ?",
+    "Qui ici serait le plus mauvais perdant au Monopoly ?",
+    "Qui ici garderait le plus longtemps un objet cassé en promettant de le réparer ?",
+    "Qui ici serait le premier à monter sur scène pour un karaoké ?",
+    "Qui ici serait capable de manger le même plat pendant un mois ?",
+    "Qui ici te ferait le meilleur cadeau d'anniversaire ?",
+    "Qui ici serait le plus susceptible de lancer une mode ridicule ?",
+    "Qui ici ferait le plus de bruit en essayant d'être discret ?",
+    "Qui ici se ferait le plus facilement piéger par une blague du premier avril ?",
+    "Qui ici voudrait absolument choisir la musique en voiture ?",
+    "Qui ici ferait le meilleur colocataire pour économiser de l'argent ?",
+    "Qui ici serait le plus susceptible d'oublier où il a garé sa voiture ?",
+    "Qui ici aurait la décoration intérieure la plus surprenante ?",
+    "Qui ici serait le meilleur pour improviser une chanson ?",
+    "Qui ici pourrait passer deux heures à choisir un film sans en regarder aucun ?",
+    "Qui ici te donnerait le plus envie de partir en road trip ?",
+    "Qui ici deviendrait le chef du groupe sur une île déserte ?",
+    "Qui ici serait le plus susceptible de lancer une discussion absurde à minuit ?",
+    "Qui ici aurait le plus de mal à garder une plante en vie ?",
+    "Qui ici pourrait transformer un dîner tranquille en soirée mémorable ?",
+    "Qui ici serait le plus heureux de gagner un voyage au hasard ?",
+    "Qui ici choisirais-tu pour te représenter dans un jeu télévisé ?"
+  ],
+  "2": [
+    "Qui ici correspond le mieux à ton style de personne physiquement ?",
+    "Qui ici a le plus de charme sans chercher à séduire ?",
+    "Qui ici pourrais-tu embrasser si vous étiez tous les deux célibataires ?",
+    "Qui ici choisirais-tu pour un premier rendez-vous ?",
+    "Qui ici a le sourire le plus séduisant ?",
+    "Qui ici pourrait te faire rougir devant tout le groupe ?",
+    "Qui ici a le plus de chances de recevoir une déclaration d'amour secrète ?",
+    "Qui ici a la voix la plus attirante ?",
+    "Qui ici aurait le plus de succès sur une application de rencontres ?",
+    "Qui ici ferait le meilleur partenaire pour un week-end romantique ?",
+    "Qui ici est le plus susceptible de tomber amoureux trop vite ?",
+    "Qui ici t'a le plus surpris par son charme depuis votre rencontre ?",
+    "Qui ici serait le plus difficile à reconquérir après une rupture ?",
+    "Qui ici aurait le plus de facilité à obtenir ton numéro ?",
+    "Qui ici a le style vestimentaire le plus attirant ?",
+    "Qui ici semble avoir les critères amoureux les plus exigeants ?",
+    "Qui ici pourrait te faire oublier ton type habituel ?",
+    "Qui ici est le plus susceptible de faire le premier pas ?",
+    "Qui ici aurait le plus de mal à avouer un crush ?",
+    "Qui ici aurait le plus de succès lors d'un speed dating ?",
+    "Qui ici te donnerait envie de prolonger un tête-à-tête jusqu'au matin ?",
+    "Qui ici ferait le plus bel effort pour séduire quelqu'un ?",
+    "Qui ici sait le mieux entretenir le mystère ?",
+    "Qui ici aurait le plus de mal à refuser un rendez-vous avec son ex ?",
+    "Qui ici pourrait tomber amoureux d'une personne rencontrée la veille ?",
+    "Qui ici a probablement déjà reçu une photo de séduction inattendue ?",
+    "Qui ici serait le plus susceptible d'écrire une lettre d'amour ?",
+    "Qui ici est le plus romantique en secret ?",
+    "Qui ici choisirais-tu pour jouer ton partenaire dans une scène romantique ?",
+    "Qui ici aurait le plus de facilité à séduire avec son humour ?",
+    "Qui ici serait le plus susceptible de tomber amoureux d'un collègue ?",
+    "Qui ici te ferait le plus douter de ton célibat ?",
+    "Qui ici a le plus beau regard ?",
+    "Qui ici ferait le plus bel effet en tenue de soirée ?",
+    "Qui ici a probablement déjà été le crush de plusieurs amis ?",
+    "Qui ici serait le plus à l'aise pour demander un baiser ?",
+    "Qui ici te donnerait le plus envie de danser en tête-à-tête ?",
+    "Qui ici serait le plus susceptible d'envoyer un message romantique au mauvais destinataire ?",
+    "Qui ici a le plus de chances de recevoir un compliment sur son physique ce soir ?",
+    "Qui ici serait capable de garder une relation secrète pendant plusieurs mois ?",
+    "Qui ici tombe le plus souvent sous le charme de personnes indisponibles ?",
+    "Qui ici aurait le plus de mal à supporter une relation à distance ?",
+    "Qui ici pourrait faire un cadeau beaucoup trop cher à son crush ?",
+    "Qui ici a l'air le plus difficile à impressionner en rendez-vous ?",
+    "Qui ici est le plus susceptible de regretter d'avoir laissé passer une occasion amoureuse ?",
+    "Qui ici ferait le meilleur organisateur de rendez-vous surprise ?",
+    "Qui ici te semble le plus tactile en couple ?",
+    "Qui ici aimerait recevoir un message de flirt de ta part, selon toi ?",
+    "Qui ici est le plus susceptible de demander l'avis de ses amis avant d'envoyer un message à son crush ?",
+    "Qui ici aurait le plus de mal à cacher un coup de foudre ?",
+    "Qui ici choisirais-tu pour t'aider à préparer un profil de rencontre ?",
+    "Qui ici pourrait te donner envie de partir en voyage à deux ?",
+    "Qui ici aurait le plus de chances de se marier sur un coup de tête ?",
+    "Qui ici a le plus de mal à tourner la page après une rupture ?",
+    "Qui ici est le plus susceptible de croire au destin amoureux ?",
+    "Qui ici a probablement déjà eu un rendez-vous incroyablement gênant ?",
+    "Qui ici pourrait se retrouver dans une romance de vacances ?",
+    "Qui ici serait le plus susceptible de faire semblant d'être indifférent à un compliment ?",
+    "Qui ici ferait le meilleur partenaire pour une soirée chic ?",
+    "Qui ici aimerait le plus recevoir une déclaration devant tout le monde ?",
+    "Qui ici serait le plus susceptible de craquer pour le frère ou la sœur adulte d'un ami ?",
+    "Qui ici te paraît le plus séduisant au naturel ?",
+    "Qui ici est le plus susceptible de préférer un flirt à une relation sérieuse ?",
+    "Qui ici aurait le plus de facilité à te mettre en confiance en rendez-vous ?",
+    "Qui ici aurait le plus de mal à résister à un compliment bien placé ?",
+    "Qui ici est le plus susceptible de conserver des souvenirs de toutes ses anciennes relations ?",
+    "Qui ici semble accorder le plus d'importance à l'alchimie physique ?",
+    "Qui ici te paraît le plus mystérieux dans sa vie amoureuse ?",
+    "Qui ici aimerait le plus vivre une histoire d'amour digne d'un film ?",
+    "Qui ici te ferait le plus rire pendant un rendez-vous raté ?",
+    "Qui ici serait le plus susceptible de faire un énorme détour pour voir son crush ?",
+    "Qui ici pourrait séduire quelqu'un uniquement grâce à sa personnalité ?",
+    "Qui ici semble avoir le plus changé de style depuis sa dernière relation ?",
+    "Qui ici aurait le plus de facilité à rencontrer quelqu'un sans utiliser Internet ?",
+    "Qui ici est le plus susceptible de tomber amoureux d'un ami proche ?",
+    "Qui ici paraît le plus spontané dans ses gestes d'affection ?",
+    "Qui ici a le plus de chances d'avoir une collection de rendez-vous improbables à raconter ?",
+    "Qui ici pourrait attendre plusieurs semaines avant d'inviter quelqu'un à sortir ?",
+    "Qui ici ferait le plus de jaloux en entrant dans une soirée ?",
+    "Qui ici serait le plus susceptible d'offrir des fleurs sans occasion particulière ?",
+    "Qui ici aurait le plus de facilité à séduire dans une autre langue ?",
+    "Qui ici serait le plus susceptible de répondre à une déclaration par une blague ?",
+    "Qui ici a le plus de chances de séduire sans dire un seul mot ?",
+    "Qui ici aurait le plus de difficulté à rester ami avec son premier amour ?",
+    "Qui ici serait le plus susceptible d'organiser une demande en mariage spectaculaire ?",
+    "Qui ici choisirais-tu pour te conseiller avant un premier baiser ?",
+    "Qui ici te semble le plus à l'aise avec les compliments physiques ?",
+    "Qui ici serait le plus susceptible de craquer pour une personne complètement différente de lui ?",
+    "Qui ici pourrait te faire apprécier une chanson d'amour que tu détestes ?",
+    "Qui ici semble être le plus fidèle à son type de partenaire habituel ?",
+    "Qui ici serait le plus susceptible d'attendre que l'autre envoie le premier message ?",
+    "Qui ici a probablement déjà eu un coup de cœur pour une personne dont il ignorait le prénom ?",
+    "Qui ici choisirais-tu pour partager un dîner aux chandelles ?",
+    "Qui ici aurait le plus de facilité à faire rire quelqu'un de timide en rendez-vous ?",
+    "Qui ici te paraît le plus capable de faire durer la magie dans un couple ?",
+    "Qui ici pourrait te surprendre par son côté romantique ?",
+    "Qui ici aurait le plus de chances de recevoir un message d'un admirateur anonyme ?",
+    "Qui ici pourrait faire passer un simple café pour un rendez-vous mémorable ?",
+    "Qui ici semble préférer les histoires imprévues aux rencontres organisées ?",
+    "Qui ici te plairait le plus si tu devais choisir uniquement sur la personnalité ?"
+  ],
+  "3": [
+    "Qui ici aurais-tu le plus de mal à supporter en couple ?",
+    "Qui ici pourrais-tu envisager comme partenaire d'une aventure d'un soir si l'envie était réciproque ?",
+    "Qui ici te semble le plus susceptible de mener une double vie amoureuse ?",
+    "Qui ici aurais-tu le plus de mal à croire sur parole ?",
+    "Qui ici te semble le plus susceptible de jouer avec les sentiments de quelqu'un ?",
+    "Qui ici pourrait être tenté par le partenaire d'un ami ?",
+    "Qui ici a le plus de chances de faire semblant de ne pas être jaloux ?",
+    "Qui ici te paraît le plus susceptible d'avoir des goûts intimes surprenants ?",
+    "Qui ici pourrait te plaire physiquement mais pas du tout sentimentalement ?",
+    "Qui ici serait le plus susceptible de retourner avec son ex tout en le critiquant ?",
+    "Qui ici donnerait le plus l'impression de flirter par intérêt ?",
+    "Qui ici te ferait le plus hésiter à lui confier un secret intime ?",
+    "Qui ici serait le plus susceptible de faire une scène de jalousie pour rien ?",
+    "Qui ici choisirais-tu pour partager un lit si tu étais célibataire et que l'attirance était mutuelle ?",
+    "Qui ici te paraît le plus capable de rompre par simple message ?",
+    "Qui ici aurait le plus de mal à accepter que son ex refasse sa vie ?",
+    "Qui ici serait le plus susceptible de mentir sur ses sentiments pour éviter une dispute ?",
+    "Qui ici pourrait se retrouver dans un triangle amoureux ?",
+    "Qui ici te semble le plus susceptible de cacher une infidélité ?",
+    "Qui ici pourrait avoir un fantasme que personne ne soupçonnerait ?",
+    "Qui ici serait le plus susceptible de préférer une relation sans engagement ?",
+    "Qui ici serait le plus difficile à fréquenter à cause de son ego ?",
+    "Qui ici serait le plus susceptible de profiter de la générosité des autres sans jamais rendre la pareille ?",
+    "Qui ici pourrait faire semblant d'être intéressé par quelqu'un uniquement pour rendre son ex jaloux ?",
+    "Qui ici te semble le plus susceptible de juger les autres en cachette ?",
+    "Qui ici aurait le plus de chances de reprendre contact avec une ancienne aventure ?",
+    "Qui ici pourrait te faire craquer alors même que tu sais que vous n'êtes pas compatibles ?",
+    "Qui ici serait le plus susceptible de vouloir être au centre de toutes les conversations ?",
+    "Qui ici a le plus de chances de comparer son partenaire à ses anciennes relations ?",
+    "Qui ici te paraît le plus audacieux dans sa vie intime ?",
+    "Qui ici serait le plus susceptible de cacher une dette à son partenaire ?",
+    "Qui ici pourrait avoir déjà regretté une nuit passée avec quelqu'un ?",
+    "Qui ici refuserais-tu de fréquenter malgré une éventuelle attirance ?",
+    "Qui ici est le plus susceptible de se vexer si personne ne le trouve séduisant ?",
+    "Qui ici aurait le plus de mal à entendre une vérité sur son caractère ?",
+    "Qui ici pourrait devenir jaloux de la réussite professionnelle d'un ami ?",
+    "Qui ici serait le plus susceptible de raconter une version très avantageuse de sa dernière rupture ?",
+    "Qui ici te paraît le plus susceptible de garder des sentiments pour deux personnes en même temps ?",
+    "Qui ici serait le plus difficile à oublier après une courte histoire ?",
+    "Qui ici aurait le plus de chances de proposer une relation ouverte ?",
+    "Qui ici semble le plus susceptible de privilégier l'attirance physique à la compatibilité ?",
+    "Qui ici est le plus susceptible de critiquer une personne dès qu’elle quitte la pièce ?",
+    "Qui ici serait le plus susceptible de mentir sur le prix de ses vêtements pour impressionner ?",
+    "Qui ici aurait le plus de mal à accepter un refus amoureux sans se remettre en question ?",
+    "Qui ici te semblerait le plus susceptible de raconter un secret pour se rendre intéressant ?",
+    "Qui ici te paraît le moins capable de se remettre en question pendant une dispute ?",
+    "Qui ici pourrait avoir un avis sur toi qu'il n'oserait jamais te dire ?",
+    "Qui ici serait le plus susceptible de rester en couple par confort plutôt que par amour ?",
+    "Qui ici te paraît le plus susceptible d'avoir déjà flirté avec quelqu'un en sachant que cette personne était en couple ?",
+    "Qui ici pourrait te surprendre par sa confiance dans l'intimité ?",
+    "Qui ici serait le plus susceptible de faire passer son image avant une amitié ?",
+    "Qui ici inviterais-tu en dernier à un voyage entre amis ?",
+    "Qui ici serait le plus susceptible de vouloir connaître le passé intime de son partenaire en détail ?",
+    "Qui ici te paraît le plus capable de pardonner une infidélité ?",
+    "Qui ici aurait le plus de difficultés à garder une amitié après une aventure ?",
+    "Qui ici te semble le plus susceptible de confondre désir et amour ?",
+    "Qui ici serait le plus susceptible de prendre le mérite du travail de quelqu’un d’autre ?",
+    "Qui ici serait le plus susceptible de se vanter de ses conquêtes ?",
+    "Qui ici pourrait accepter un rendez-vous avec une personne qui ne lui plaît pas juste pour être admiré ?",
+    "Qui ici aurait le plus de mal à supporter que son partenaire gagne davantage que lui ?",
+    "Qui ici serait le plus susceptible de donner des conseils amoureux qu'il n'applique jamais ?",
+    "Qui ici pourrait te donner envie de vivre une histoire secrète si vous étiez tous les deux libres ?",
+    "Qui ici serait le plus susceptible de cacher un message de son ex par peur d'une dispute ?",
+    "Qui ici aurait le plus de mal à reconnaître qu'un ami a mieux réussi que lui ?",
+    "Qui ici aurait le plus de chances de se faire passer pour célibataire lors d'une soirée ?",
+    "Qui ici te paraît le plus susceptible d'exagérer son expérience amoureuse ?",
+    "Qui ici aurait le plus de mal à prêter de l’argent à un ami dans le besoin ?",
+    "Qui ici a le plus de chances de se sentir en compétition avec son meilleur ami ?",
+    "Qui ici pourrait rompre une amitié pour une histoire d'amour ?",
+    "Qui ici aurait le plus de mal à parler ouvertement de ses envies intimes ?",
+    "Qui ici ferait le plus semblant d’être heureux pour un ami qui vient de réussir ?",
+    "Qui ici te semblerait le plus difficile à satisfaire dans une relation ?",
+    "Qui ici serait le plus susceptible de garder un cadeau de son ex en le cachant ?",
+    "Qui ici pourrait être attiré par quelqu'un qu'il critique régulièrement ?",
+    "Qui ici aurait le plus de mal à partager les tâches dans un couple ?",
+    "Qui ici te semble le plus susceptible d'avoir déjà feint d'être amoureux ?",
+    "Qui ici choisirais-tu pour une nuit romantique sans lendemain, à condition que vous le souhaitiez tous les deux ?",
+    "Qui ici serait le plus susceptible de mettre un ami de côté dès qu'il se met en couple ?",
+    "Qui ici pourrait te donner envie de garder tes distances après un premier rendez-vous ?",
+    "Qui ici aurais-tu le moins envie de retrouver comme supérieur hiérarchique ?",
+    "Qui ici serait le plus susceptible de changer ses opinions pour plaire à quelqu'un ?",
+    "Qui ici aurait le plus de mal à accepter que son partenaire soit encore ami avec un ex ?",
+    "Qui ici te paraît le plus susceptible de séduire par esprit de compétition ?",
+    "Qui ici pourrait avoir une vie amoureuse bien plus mouvementée qu'il ne le laisse croire ?",
+    "Qui ici serait le plus susceptible de faire croire à un ami qu'il a oublié son anniversaire alors qu'il ne voulait pas venir ?",
+    "Qui ici aurait le plus de mal à avouer qu'il n'apprécie pas le partenaire d'un ami ?",
+    "Qui ici te semble le plus susceptible de choisir un partenaire pour son statut social ?",
+    "Qui ici pourrait se montrer très différent en privé et en public ?",
+    "Qui ici serait le plus susceptible de faire une crise de jalousie tout en réclamant sa liberté ?",
+    "Qui ici a le plus besoin de l’approbation des autres pour se sentir important ?",
+    "Qui ici serait le plus susceptible de préférer être désiré plutôt qu'aimé ?",
+    "Qui ici serait le plus susceptible de raconter un dossier gênant sur un ami pour faire rire la galerie ?",
+    "Qui ici te semble le plus susceptible de garder une rancune pendant des années ?",
+    "Qui ici pourrait être ton plus grand regret amoureux si tu ne tentais jamais rien ?",
+    "Qui ici aurait le plus de chances de se sentir attiré par deux joueurs à la fois ?",
+    "Qui ici serait le plus susceptible de faire un compliment qu'il ne pense pas ?",
+    "Qui ici penses-tu être le moins sincère lorsqu’il présente ses excuses ?",
+    "Qui ici te paraît le plus susceptible de cacher une insécurité derrière une grande confiance ?",
+    "Qui ici serait le plus susceptible d'abandonner une relation dès que la passion diminue ?",
+    "Qui ici aimerais-tu entendre répondre à cette question : « De qui as-tu déjà été secrètement amoureux ? »"
+  ],
+  4: [
+    "Qui ici pourrais-tu désirer sans vouloir construire une histoire d'amour avec cette personne ?",
+    "Qui ici as-tu déjà trouvé séduisant dans une tenue très simple ?",
+    "Qui ici te donnerait envie d'oser faire le premier pas si vous étiez libres et consentants ?",
+    "Qui ici serais-tu le plus gêné de voir découvrir tes fantasmes ?",
+    "Qui ici pourrait te faire changer d'avis sur les aventures sans lendemain ?",
+    "Qui ici te paraît le plus à l'aise pour exprimer ses limites dans l'intimité ?",
+    "Qui ici aimerais-tu entendre te dire que tu lui plais ?",
+    "Qui ici aurait le plus de mal à avouer une attirance purement physique ?",
+    "Qui ici te plaît le plus physiquement, même si tu ne l'as jamais avoué ?",
+    "Qui ici pourrais-tu imaginer partager un week-end romantique loin de tous ?",
+    "Qui ici pourrait te surprendre par son côté romantique en privé ?",
+    "Qui ici te semble le plus capable de parler de sexualité sans gêne ?",
+    "Qui ici te paraît le plus susceptible de garder un ancien flirt secret pour éviter les commentaires ?",
+    "Qui ici serais-tu le plus curieux de voir dans un rôle de séducteur ?",
+    "Qui ici serais-tu le plus tenté d'embrasser si personne ne devait vous juger et que l'envie était réciproque ?",
+    "Qui ici te ferait le plus rougir en te demandant ce qui t'attire chez lui ou elle ?",
+    "Qui ici te paraît le plus susceptible de préférer la tendresse à la passion ?",
+    "Qui ici pourrais-tu trouver irrésistible pendant une danse à deux ?",
+    "Qui ici serait le plus honnête si son partenaire lui demandait de parler de ses désirs ?",
+    "Qui ici pourrait avoir un côté sensuel complètement différent de son image publique ?",
+    "Qui ici serait le plus capable de distinguer une envie passagère de vrais sentiments ?",
+    "Qui ici pourrait te donner envie de prolonger un tête-à-tête jusqu'au matin ?",
+    "Qui ici serais-tu le plus tenté de retrouver en tête-à-tête après cette soirée si l'envie était partagée ?",
+    "Qui ici pourrait te faire sentir particulièrement désiré ?",
+    "Qui ici te paraît le plus susceptible de préférer une relation passionnelle à une relation stable ?",
+    "Qui ici pourrait t'avouer une attirance et te laisser sans voix ?",
+    "Qui ici te semble avoir les critères de séduction les plus inattendus ?",
+    "Qui ici serait le plus susceptible d'avouer avoir déjà eu un fantasme sur un autre adulte de ce groupe ?",
+    "Qui ici te ferait le plus hésiter avant d'envoyer un message de séduction ?",
+    "Qui ici te semble capable de rester ami avec une personne pour laquelle il ressent encore du désir ?",
+    "Qui ici aimerais-tu voir faire un compliment vraiment intime à ton sujet ?",
+    "Qui ici te paraît le plus susceptible de tomber amoureux après une aventure sans engagement ?",
+    "Qui ici te paraît le plus susceptible d'avoir déjà envoyé une photo intime à un partenaire consentant ?",
+    "Qui ici serait le plus susceptible de parler de ses anciennes relations pendant un rendez-vous ?",
+    "Qui ici aimerais-tu entendre raconter sa plus grande déception dans sa vie sexuelle, s'il en a envie ?",
+    "Qui ici serais-tu le plus surpris d'apprendre qu'il a déjà reçu une déclaration d'amour secrète ?",
+    "Qui ici te semble avoir le plus besoin de se sentir désiré pour être épanoui ?",
+    "Qui ici pourrait avoir déjà accepté une aventure alors qu'il espérait en réalité une relation sérieuse ?",
+    "Qui ici aurait le plus de mal à avouer que la routine a pris le dessus dans son couple ?",
+    "Qui ici pourrais-tu imaginer séduire uniquement par des mots ?",
+    "Qui ici aurais-tu le plus de mal à regarder dans les yeux après lui avoir avoué une attirance sexuelle ?",
+    "Qui ici pourrait te faire regretter de ne pas l'avoir rencontré à une autre période de ta vie ?",
+    "Qui ici serait le plus à l'aise pour dire à son partenaire qu'une envie a changé ?",
+    "Qui ici pourrait se sentir jaloux du passé amoureux de son partenaire ?",
+    "Qui ici te paraît le plus susceptible d'avoir déjà regretté de ne pas avoir tenté une aventure ?",
+    "Qui ici pourrait préférer un rendez-vous dans un endroit discret plutôt qu'une sortie en public ?",
+    "Qui ici aurait le plus de chances de craquer pour une personne rencontrée lors d'un voyage ?",
+    "Qui ici pourrait t'attirer davantage après une conversation sincère sur vos désirs ?",
+    "Qui ici te paraît le plus susceptible d'avoir déjà caché une déception intime par peur de blesser ?",
+    "Qui ici te semble capable de proposer de nouvelles expériences à son partenaire tout en respectant ses limites ?",
+    "Qui ici serait le plus susceptible de préférer une relation exclusivement sexuelle à une relation amoureuse ?",
+    "Qui ici aimerais-tu entendre décrire sa façon idéale de vivre l'intimité dans un couple ?",
+    "Qui ici aurait le plus de mal à reconnaître qu'il ne ressent plus d'attirance pour son partenaire ?",
+    "Qui ici pourrait te surprendre en assumant une préférence amoureuse inhabituelle ?",
+    "Qui ici serait le plus susceptible de se sentir attiré par quelqu'un sans même connaître son prénom ?",
+    "Qui ici pourrais-tu envisager comme partenaire intime sans jamais l'avoir envisagé comme partenaire de vie ?",
+    "Qui ici te ferait le plus d'effet en te regardant dans les yeux sans rien dire ?",
+    "Qui ici te semble avoir le plus de chances d'avoir déjà prétendu être satisfait dans sa vie intime ?",
+    "Qui ici te semble le plus susceptible d'avoir un secret amoureux qu'il n'a jamais raconté à ses amis ?",
+    "Qui ici pourrais-tu envisager de retrouver pour une aventure secrète si vous étiez tous les deux célibataires et consentants ?",
+    "Qui ici serait le plus capable d'avouer qu'une ancienne histoire lui manque encore ?",
+    "Qui ici aurait le plus de mal à avouer que le physique compte énormément dans son désir ?",
+    "Qui ici pourrait t'intimider lors d'un premier rendez-vous tellement cette personne te plaît ?",
+    "Qui ici te semble le plus susceptible de fantasmer sur une célébrité inattendue ?",
+    "Qui ici serait le plus ouvert à discuter des attentes de chacun avant une aventure ?",
+    "Qui ici pourrait avoir déjà été attiré par une personne que ses amis lui déconseillaient ?",
+    "Qui ici serais-tu le plus gêné d'inviter à un dîner en tête-à-tête par peur des sous-entendus ?",
+    "Qui ici te paraît le plus susceptible de fantasmer sur une ancienne conquête ?",
+    "Qui ici aurait le plus de mal à dire non à une relation qui ne lui convient plus ?",
+    "Qui ici pourrait se sentir plus proche de quelqu'un après lui avoir confié une peur intime ?",
+    "Qui ici te semble le plus susceptible de préférer la spontanéité aux rendez-vous très préparés ?",
+    "Qui ici serais-tu le plus gêné d'entendre donner son avis sur ton pouvoir de séduction ?",
+    "Qui ici serait le plus susceptible de regretter un flirt qu'il n'a jamais osé concrétiser ?",
+    "Qui ici te ferait le plus plaisir en t'avouant qu'il pense parfois à toi ?",
+    "Qui ici pourrait être amoureux de quelqu'un sans souhaiter être en couple avec cette personne ?",
+    "Qui ici pourrait avoir déjà changé d'avis sur une aventure après un premier rapprochement intime ?",
+    "Qui ici pourrait te faire ressentir une attirance que tu ne saurais pas expliquer ?",
+    "Qui ici serait le plus susceptible de confondre le besoin d'attention avec l'envie d'une relation ?",
+    "Qui ici pourrait avoir déjà eu envie de reprendre contact avec une ancienne aventure ?",
+    "Qui ici serait le plus à l'aise pour discuter de contraception avec un nouveau partenaire ?",
+    "Qui ici pourrait te donner envie de lui confier un complexe physique ?",
+    "Qui ici serait le plus susceptible de garder secret le nombre réel de ses partenaires intimes ?",
+    "Qui ici pourrait être très sûr de lui en public mais timide dans l'intimité ?",
+    "Qui ici aimerais-tu entendre dire ce qui le fait craquer chez une personne dans l'intimité ?",
+    "Qui ici pourrait mettre fin à une histoire malgré une très forte attirance ?",
+    "Qui ici serait le plus susceptible d'avouer une attirance pour une personne avec laquelle il ne s'entend pas ?",
+    "Qui ici pourrais-tu trouver sexy sans pour autant avoir envie de sortir avec cette personne ?",
+    "Qui ici te semble le plus susceptible de conserver une attirance malgré des années sans se voir ?",
+    "Qui ici serait le plus gêné d'avouer qu'il a déjà rêvé d'un autre joueur ?",
+    "Qui ici pourrait te faire oublier tes complexes simplement par sa façon de te regarder ?",
+    "Qui ici aimerais-tu entendre parler de ce qui lui donne confiance dans l'intimité ?",
+    "Qui ici te paraît le plus susceptible d'avoir déjà hésité entre retrouver une ancienne conquête et tourner la page ?",
+    "Qui ici te semble le plus susceptible d'être nostalgique d'une relation purement physique ?",
+    "Qui ici choisirais-tu pour une aventure sans lendemain si vous étiez célibataires et que le désir était mutuel ?",
+    "Qui ici serait le plus surpris d'apprendre que quelqu'un dans cette pièce le trouve sexy ?",
+    "Qui ici aurait le plus de mal à avouer qu'une personne lui manque surtout physiquement ?",
+    "Qui ici te paraît le plus susceptible d'avoir une vie sexuelle très différente de ce qu'il laisse imaginer ?",
+    "Qui ici serait le plus susceptible d'avoir déjà confié un fantasme à un partenaire qu'il n'a jamais osé partager avec ses amis ?",
+    "Qui ici pourrais-tu choisir pour parler franchement de désir sans avoir peur d'être jugé ?",
+    "Qui ici serais-tu le plus curieux d'entendre répondre honnêtement à « Est-ce que je t'ai déjà attiré ? » ?"
+]
+};
+const $=id=>document.getElementById(id);
+const app=$('app');const defaultNames=['Alex','Camille','Sam','Léa'];
+const readPrefs=()=>{try{return JSON.parse(localStorage.getItem('parano_pref'))||{}}catch(e){return {}}};
+const pref=readPrefs();
+const CATEGORIES=[[1,'😇 Doux','Humour et taquineries'],[2,'🔥 Piquant','Flirts et attirance'],[3,'😈 Sans filtre','Secrets et vérités gênantes · 18+'],[4,'🔞 Interdit','Désirs et confidences intimes · 18+']];
+const initialLevels=Array.isArray(pref.levels)?[...new Set(pref.levels.filter(n=>[1,2,3,4].includes(n)))]:[1,2,3].filter(n=>n<=(Number(pref.level)||2));
+const st={page:'home',names:Array.isArray(pref.names)?pref.names:[],levels:initialLevels,adultOK:false,mode:pref.mode||'gage',round:0,reader:null,target:null,question:'',history:[],used:new Set(),counts:{},revealCount:0,secretCount:0,deck:[]};
+function save(){try{localStorage.setItem('parano_pref',JSON.stringify({names:st.names,levels:st.levels,mode:st.mode}))}catch(e){}}
+function shuffle(a){const x=a.slice();for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function esc(s){return String(s).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function head(){let rhs=st.page==='home'?'<span class="pill pink">SOIRÉE ENTRE AMIS</span>':`<button class="tiny" onclick="openMenu()">☰ Menu</button>`;return `<header><div class="brand"><span class="brand-mark">👀</span> PARANO<span style="color:#ff92d0">.</span></div><div class="header-right">${rhs}</div></header>`}
+function render(html){app.innerHTML=head()+html+'<div class="foot">Jeu original inspiré du principe des questions secrètes · Indépendant de BAZAR</div>'; window.scrollTo(0,0);updateInstallButton()}
+function goto(page){st.page=page;draw()}
+function rulesBrief(){return `<div class="rules"><div class="rule"><div class="emoji">🤫</div><b>Une question</b><span>Un seul joueur la voit</span></div><div class="rule"><div class="emoji">👉</div><b>Un prénom</b><span>On désigne quelqu'un</span></div><div class="rule"><div class="emoji">👀</div><b>Le choix</b><span>Secret ou révélation</span></div></div>`}
+function draw(){switch(st.page){
+case 'home':render(`<section class="hero"><span class="eyebrow">🔥 À jouer sur un seul téléphone</span><h1>LES SECRETS<br><span class="gradient">VONT SORTIR.</span></h1><p class="sub">Un joueur reçoit une question que personne ne connaît. Il désigne quelqu'un. Et là… tout le monde se demande <b>pourquoi ?</b></p><div class="face-box"><span class="face">👀</span></div></section><div class="card"><span class="pill">🃏 400 questions originales</span>${rulesBrief()}<div class="button-stack"><button class="btn" onclick="goto('setup')">Lancer la soirée →</button><button class="btn2" id="installBtn" onclick="installParano()">📲 Installer sur mon téléphone</button></div><div id="installHelp" class="soft-card muted" hidden></div></div><p class="muted center" style="margin-top:11px">Sans compte · Sans pub · Hors ligne après la première ouverture en ligne · 3 joueurs minimum</p>`);break;
+case 'setup':setup();break;
+case 'pass':pass();break;
+case 'private':privateView();break;
+case 'target':targetView();break;
+case 'announce':announce();break;
+case 'decision':decision();break;
+case 'peek':peek();break;
+case 'finish':finish();break;
+case 'stats':stats();break;
+case 'menu':menu();break;
+case 'revealText':showRevealText();break;
+}}
+function setup(){render(`<div class="setup-head"><div><span class="eyebrow">ÉTAPE 01 · PRÉPARATION</span><h2>Qui est<br>dans la partie ?</h2></div><span style="font-size:48px">🥳</span></div><div class="card"><h3>Les joueurs <span class="muted">(${st.names.length})</span></h3><div class="player-field"><input id="newName" maxlength="24" autocomplete="off" placeholder="Ajouter un prénom" aria-label="Prénom"><button class="add" onclick="addPlayer()" aria-label="Ajouter un joueur">+</button></div><div class="roster">${st.names.map((x,i)=>`<button class="player-chip" onclick="removePlayer(${i})">${esc(x)} <span class="x">×</span></button>`).join('')||'<span class="muted">Ajoute au moins 3 personnes pour commencer.</span>'}</div><div class="fieldtitle">🌶️ Choisis tes catégories</div><p class="muted">Coche uniquement les catégories que tu veux mélanger.</p><div class="option-grid" style="margin-top:10px">${CATEGORIES.map(([v,t,d])=>`<button type="button" class="choice category ${st.levels.includes(v)?'active':''}" aria-pressed="${st.levels.includes(v)}" onclick="toggleLevel(${v})"><strong><span class="checkmark">${st.levels.includes(v)?'✓':'○'}</span> ${t}</strong><small>100 questions · ${d}</small></button>`).join('')}</div><div class="category-tools"><button class="tiny" onclick="selectLevels(true)">Tout sélectionner</button><button class="tiny" onclick="selectLevels(false)">Tout décocher</button></div><div class="soft-card selection-total"><b>${poolSize()} questions sélectionnées</b><p class="muted">${st.levels.length?st.levels.length+' catégorie(s) · Tirage aléatoire mélangé':'Choisis au moins une catégorie.'}</p></div>${needsAdults()?`<label class="adult-check"><input type="checkbox" ${st.adultOK?'checked':''} onchange="confirmAdults(this.checked)"><span>Tous les joueurs ont 18 ans ou plus et acceptent les questions adultes. Chacun peut passer sans justification.</span></label>`:''}<div class="fieldtitle">🎲 Pour connaître la question</div><div class="option-grid"><button class="choice ${st.mode==='gage'?'active':''}" onclick="setMode('gage')"><strong>🎭 Mode gage</strong><small>Sans alcool, avec défis</small></button><button class="choice ${st.mode==='drink'?'active':''}" onclick="setMode('drink')"><strong>🥤 Mode gorgée</strong><small>Boisson au choix</small></button></div><div class="button-stack"><button class="btn" onclick="start()" ${canStart()?'':'disabled'}>Commencer avec ${st.names.length} joueurs →</button></div><div class="muted center">Personne n'est obligé de répondre ou de boire. Tout le monde peut passer son tour.</div></div>`);const inp=$('newName'); if(inp)inp.addEventListener('keydown',e=>{if(e.key==='Enter')addPlayer()})}
+function addPlayer(){const inp=$('newName');const n=(inp?.value||'').trim().replace(/\s+/g,' ');if(!n)return;if(st.names.some(x=>x.toLocaleLowerCase()===n.toLocaleLowerCase())){alert('Prénom déjà ajouté. Mets un surnom pour les distinguer.');return}if(st.names.length>=20){alert('Maximum 20 joueurs.');return}st.names.push(n);save();setup();$('newName')?.focus()}
+function removePlayer(i){st.names.splice(i,1);save();setup()}
+function needsAdults(){return st.levels.some(n=>n>=3)}
+function poolSize(){return st.levels.reduce((sum,n)=>sum+QUESTIONS[n].length,0)}
+function canStart(){return st.names.length>=3&&st.levels.length>0&&(!needsAdults()||st.adultOK)}
+function toggleLevel(n){if(!CATEGORIES.some(([v])=>v===n))return;st.levels=st.levels.includes(n)?st.levels.filter(v=>v!==n):[...st.levels,n].sort((a,b)=>a-b);st.adultOK=false;save();setup()}
+function selectLevels(all){st.levels=all?[1,2,3,4]:[];st.adultOK=false;save();setup()}
+function confirmAdults(checked){st.adultOK=checked;setup()}
+function makeDeck(){return shuffle(st.levels.flatMap(n=>QUESTIONS[n]))}
+function setMode(n){st.mode=n;save();setup()}
+function start(){if(!canStart())return;st.round=0;st.reader=null;st.target=null;st.question='';st.history=[];st.used=new Set();st.counts=Object.fromEntries(st.names.map(n=>[n,0]));st.revealCount=0;st.secretCount=0;st.deck=makeDeck();nextRound()}
+function chooseQuestion(){if(st.deck.length===0)st.deck=makeDeck();return st.deck.pop()}
+function nextRound(){const last=st.reader;st.reader=pick(st.names.filter(n=>n!==last));st.target=null;st.question=chooseQuestion();st.round+=1;goto('pass')}
+function progress(){return `<div class="toprow"><span class="counter">MANCHE ${st.round}</span><span class="pill">${st.levels.length===1?CATEGORIES.find(([v])=>v===st.levels[0])[1].toUpperCase():'🎲 MIX · '+st.levels.length+' CATÉGORIES'}</span></div><div class="roundline"><div style="width:${({pass:20,private:39,target:55,announce:70,decision:83,peek:92,finish:100}[st.page]||10)}%"></div></div>`}
+function pass(){render(`${progress()}<div class="center" style="margin-top:14px"><span class="eyebrow">🤫 PASSAGE DU TÉLÉPHONE</span><h2>Au tour de<br><span style="color:#efa5f5">${esc(st.reader)} !</span></h2><div class="glass"><div class="avatar">🕵️</div><p class="word">Tu vas découvrir<br>une question secrète.</p><p class="notice">Personne d'autre ne doit voir l'écran. Lis la question dans ta tête, puis choisis un joueur.</p></div><button class="btn" onclick="goto('private')">Je suis ${esc(st.reader)} · Voir la question 👁️</button><button class="ghost" onclick="skipQuestion()">Changer de question</button></div>`)}
+function privateView(){render(`${progress()}<span class="eyebrow">🔒 POUR LES YEUX DE ${esc(st.reader).toUpperCase()}</span><div class="paper"><span class="kbd">QUESTION SECRÈTE</span><div class="secret">${esc(st.question)}</div><span class="kbd">NE LA LIS PAS À VOIX HAUTE</span></div><div class="h-notice">Choisis une personne correspondant le mieux à la question. Tu vas annoncer son prénom à voix haute, mais surtout <b>pas la question</b>.</div><button class="btn" onclick="goto('target')">J'ai choisi dans ma tête →</button><button class="btn2" style="margin-top:10px" onclick="skipQuestion()">🔀 Une autre question</button>`)}
+function skipQuestion(){st.question=chooseQuestion();goto('pass')}
+function targetView(){render(`${progress()}<span class="eyebrow">👉 DÉSIGNE LA PERSONNE</span><h2>Qui vas-tu<br><span style="color:#ff9dca">pointer du doigt ?</span></h2><p class="sub">${esc(st.reader)}, sélectionne son prénom. Attention : les autres ne doivent toujours pas connaître la question.</p><div class="target-grid">${st.names.map((n,i)=>n===st.reader?'':`<button class="target" onclick="selectTarget(st.names[${i}])">👀 ${esc(n)}</button>`).join('')}</div><div class="space"></div><button class="btn2" onclick="goto('private')">← Revoir la question</button>`)}
+function selectTarget(n){st.target=n;st.counts[n]=(st.counts[n]||0)+1;goto('announce')}
+function announce(){render(`${progress()}<div class="glass" style="margin-top:10px"><div class="heart">👉</div><div class="question-label">${esc(st.reader)} A DÉSIGNÉ…</div><div class="name" style="margin:18px 0;color:#ffabdf">${esc(st.target)} !</div><p class="word" style="font-size:25px">Mais pour quelle raison ?</p><div class="more"><span class="mini-person">🤔 C'est gentil ?</span><span class="mini-person">🔥 C'est gênant ?</span><span class="mini-person">👀 Un secret ?</span></div></div><div class="center"><p class="notice">${esc(st.reader)}, garde un visage impassible ! Personne ne doit révéler la question.</p></div><button class="btn" onclick="goto('decision')">${esc(st.target)} décide →</button><button class="btn2" style="margin-top:10px" onclick="reselect()">Modifier la personne désignée</button>`)}
+function reselect(){st.counts[st.target]=Math.max(0,st.counts[st.target]-1);st.target=null;goto('target')}
+function cost(){return st.mode==='drink'?'une gorgée de la boisson de ton choix':'un gage au choix du groupe'}
+function allCost(){return st.mode==='drink'?'Le groupe prend une gorgée au choix.':'Le groupe relève un mini-défi collectif.'}
+function decision(){render(`${progress()}<div class="center" style="margin-top:14px"><span class="eyebrow">👀 LE DILEMME</span><h2>${esc(st.target)},<br><span style="color:#fda1d2">tu veux savoir ?</span></h2><p class="sub">Tu peux connaître la question que ${esc(st.reader)} a lue… mais le prix de ta curiosité est <b>${esc(cost())}</b>.</p><div class="glass"><div class="avatar">🤯</div><div class="word">« Pourquoi moi ?! »</div><p class="notice">Tu peux aussi refuser : la question restera secrète.</p></div></div><div class="button-stack"><button class="btn" onclick="reveal()">😈 Oui, je veux savoir !</button><button class="btn2" onclick="keepSecret()">🤐 Non, je préfère ne pas savoir</button><button class="btn2" onclick="passTurn()">🕊️ Passer sans gage</button></div>`)}
+function reveal(){st.revealCount+=1;st.history.push({round:st.round,reader:st.reader,target:st.target,revealed:true});goto('peek')}
+function keepSecret(){st.secretCount+=1;st.history.push({round:st.round,reader:st.reader,target:st.target,revealed:false});goto('finish')}
+function passTurn(){st.history.push({round:st.round,reader:st.reader,target:st.target,revealed:null});goto('finish')}
+function peek(){render(`${progress()}<div class="center"><span class="eyebrow">🔒 NE REGARDE PAS L'ÉCRAN</span><h2>Seul(e) ${esc(st.target)}<br>doit lire ceci.</h2><p class="sub">Passe le téléphone à ${esc(st.target)}. Les autres : détournez les yeux !</p></div><div class="glass"><div class="avatar">🤫</div><p class="word">La vérité t'attend.</p><p class="notice">Quand tu es seul(e) à regarder, appuie sur le bouton.</p></div><button class="btn" onclick="goto('revealText')">Je suis ${esc(st.target)} · Révéler 👁️</button>`)}
+function showRevealText(){st.page='revealText';render(`<span class="eyebrow">😈 LA VÉRITÉ · POUR ${esc(st.target).toUpperCase()}</span><div class="paper"><span class="kbd">LA QUESTION DE ${esc(st.reader).toUpperCase()}</span><div class="secret">${esc(st.question)}</div></div><div class="center" style="margin-top:12px"><h3>Tu comprends mieux maintenant ? 👀</h3><p class="notice">Tu peux garder la question pour toi ou en parler au groupe si tout le monde est d'accord.</p></div><div class="banner">${esc(allCost())} Chacun peut remplacer le défi par une option sans alcool ou passer.</div><div class="space"></div><button class="btn" onclick="goto('finish')">Terminer cette manche →</button>`)}
+function finish(){const last=st.history[st.history.length-1];let msg=last?.revealed===true?'La curiosité a gagné. 👀':last?.revealed===false?'Le secret reste bien gardé. 🤐':'Un tour passé, sans pression. 🕊️';render(`${progress()}<div class="center" style="margin-top:45px"><div style="font-size:71px;margin-bottom:15px">${last?.revealed===true?'🔥':last?.revealed===false?'🤫':'💜'}</div><h2>${msg}</h2><p class="sub">${esc(st.reader)} a choisi ${esc(st.target)}. ${last?.revealed===true?'Une révélation qui va faire parler…':'Le groupe peut maintenant imaginer toutes les raisons.'}</p><div class="dash"><div><b>${st.round}</b><span>Manches</span></div><div><b>${st.revealCount}</b><span>Révélations</span></div><div><b>${st.secretCount}</b><span>Secrets</span></div></div></div><div class="button-stack"><button class="btn" onclick="nextRound()">Manche suivante →</button><button class="btn2" onclick="goto('stats')">📊 Voir les statistiques</button></div>`)}
+function stats(){let sorted=Object.entries(st.counts).sort((a,b)=>b[1]-a[1]);let mx=Math.max(1,...Object.values(st.counts));render(`<span class="eyebrow">📊 APRÈS ${st.round} MANCHES</span><h2>Les plus<br><span style="color:#eda0e4">suspects 👀</span></h2><p class="sub">Combien de fois chaque personne a été désignée ?</p><div class="card">${sorted.map(([n,c],i)=>`<div class="score-row"><div class="rank">${i+1}</div><div style="flex:1"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(n)}</b><span style="color:#e7c8f9">${c} fois</span></div><div class="scorebar"><div style="width:${Math.round(c/mx*100)}%"></div></div></div></div>`).join('')}</div><div class="dash"><div><b>${st.round}</b><span>Manches</span></div><div><b>${st.revealCount}</b><span>Révélations</span></div><div><b>${st.secretCount}</b><span>Secrets</span></div></div><div class="button-stack"><button class="btn" onclick="nextRound()">Reprendre le jeu →</button><button class="btn2" onclick="goto('menu')">Menu</button></div>`)}
+function menu(){render(`<span class="eyebrow">⚙️ OPTIONS</span><h2>La soirée<br>continue ?</h2><div class="card"><h3>Partie en cours</h3><p class="muted" style="margin-top:6px">${st.round} manche(s) · ${st.names.length} joueur(s)</p><div class="button-stack">${st.round?'<button class="btn" onclick="resume()">↩ Revenir au jeu</button>':''}<button class="btn2" onclick="goto('stats')">📊 Statistiques</button><button class="btn2" onclick="resetSetup()">👥 Nouvelle partie / joueurs</button><button class="btn2" onclick="goto('home')">🏠 Accueil</button></div></div><div class="soft-card"><h3>Les règles</h3><p class="muted" style="margin-top:10px">Une personne découvre secrètement la question, choisit quelqu'un et annonce son prénom. La personne désignée accepte ou non le gage pour lire la question à l'abri des regards. Dans cette version, quand la question est révélée, le groupe relève aussi un mini-défi collectif (ou prend une gorgée si ce mode a été choisi). On peut toujours passer sans justification.</p></div>`)}
+function resume(){goto(st.resumePage||'pass')}
+function resetSetup(){if(st.round&&!confirm('Créer une nouvelle partie ? Les statistiques de la partie en cours seront effacées.'))return;st.round=0;st.deck=[];st.adultOK=false;st.history=[];st.counts={};st.revealCount=0;st.secretCount=0;goto('setup')}
+function openMenu(){if(st.page!=='menu')st.resumePage=st.page;goto('menu')}
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&st.page==='revealText')goto('finish')});
+
+let pendingInstall=null;
+function isInstalled(){return window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}
+function updateInstallButton(){const b=$('installBtn');if(b)b.hidden=isInstalled()}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pendingInstall=e;updateInstallButton()});
+window.addEventListener('appinstalled',()=>{pendingInstall=null;updateInstallButton();const h=$('installHelp');if(h)h.hidden=true});
+async function installParano(){
+  if(isInstalled())return;
+  if(pendingInstall){const prompt=pendingInstall;pendingInstall=null;try{await prompt.prompt();const result=await prompt.userChoice;if(result.outcome==='accepted')return}catch(e){/* manual instructions below */}}
+  const h=$('installHelp');if(!h)return;
+  const ios=/iPad|iPhone|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(location.protocol==='file:')h.textContent="Pour installer PARANO, ouvre d’abord sa version hébergée via une adresse HTTPS.";
+  else if(ios)h.textContent="Sur iPhone : ouvre cette page dans Safari, touche Partager, puis Sur l’écran d’accueil et Ajouter. Active Ouvrir comme app web si proposé.";
+  else h.textContent="Dans Chrome sur Android : touche ⋮, puis Installer l’application ou Ajouter à l’écran d’accueil. Si l’option n’apparaît pas, recharge la page en HTTPS après la première ouverture.";
+  h.hidden=false;
+}
+if('serviceWorker' in navigator && !window.Capacitor && (location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('PARANO: cache hors connexion indisponible',e)));
+}
+
+draw();
+</script>
+</body>
+</html>

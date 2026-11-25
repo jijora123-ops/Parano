@@ -1,0 +1,7 @@
+{
+  "appId": "fr.sinz.parano",
+  "appName": "PARANO",
+  "webDir": "www",
+  "backgroundColor": "#130c20",
+  "android": { "allowMixedContent": false }
+}

@@ -1,0 +1,32 @@
+PARANO — APPLICATION ANDROID (APK)
+==================================
+
+Cette app embarque tout le jeu : pas besoin d'hébergeur, ni de connexion
+internet, ni de Chrome. Elle s'installe comme une vraie application.
+
+MÉTHODE SANS PC NI ANDROID STUDIO (GitHub, gratuit)
+1. Crée un compte sur github.com puis un nouveau dépôt (New repository),
+   nom au choix, en privé si tu veux.
+2. Dans le dépôt : Add file > Upload files, glisse TOUT le contenu de ce
+   dossier (y compris le dossier .github — si ton téléphone/PC le cache,
+   active l'affichage des fichiers cachés), puis Commit.
+3. Onglet Actions > "Build APK PARANO" : attends ~5 minutes (pastille verte).
+4. Clique sur l'exécution terminée > en bas, "Artifacts" > PARANO-apk
+   (télécharge le zip, ouvre-le : app-debug.apk).
+5. Envoie l'APK sur ton téléphone, ouvre-le et autorise
+   "Installer des applications inconnues" pour ton navigateur/gestionnaire
+   de fichiers si Android le demande.
+
+MÉTHODE ANDROID STUDIO (sur PC)
+  npm install
+  npx cap add android
+  npx @capacitor/assets generate --android --assetPath assets
+  npx cap sync android
+  npx cap open android   > Build > Build APK(s)
+
+MISE À JOUR DU JEU
+Remplace www/index.html, puis relance la compilation (re-upload sur GitHub
+ou npx cap sync android).
+
+NB : c'est un APK de test (debug), parfait pour un usage perso / entre amis.
+Pour le Play Store il faudrait un APK/AAB signé avec ta propre clé.
